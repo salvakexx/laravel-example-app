@@ -1,0 +1,88 @@
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx/logs:/var/log/nginx
+      - ./:/var/www/html
+    networks:
+      - example_network
+
+  php-fpm:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    restart: always
+    volumes:
+      - ./:/var/www/html
+      - ./docker/php/conf.d:/usr/local/etc/php/conf.d
+      - ./docker/php/logs:/var/log/php
+    networks:
+      - example_network
+    ports:
+        - "9000:9000"
+
+  postgres:
+      image: postgres:15.3-alpine3.18
+      restart: always
+      environment:
+          - POSTGRES_USER=example
+          - POSTGRES_PASSWORD=example
+      ports:
+          - '5432:5432'
+      volumes:
+          - db_data:/var/lib/postgresql/data
+          - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/create_database.sql
+      networks:
+          - example_network
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: example
+      RABBITMQ_DEFAULT_PASS: example
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - messenger_data:/var/lib/rabbitmq
+    networks:
+      - example_network
+
+  redis:
+    image: redis:7-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - example_network
+
+  supervisor:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+#    command: ["./docker/php/entry-point.sh"]
+    restart: always
+    environment:
+      QUEUE_CONNECTION: rabbitmq
+    depends_on:
+      - php-fpm
+      - rabbitmq
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - example_network
+
+networks:
+  example_network:
+    driver: bridge
+
+volumes:
+    db_data:
+    messenger_data:
+    redis_data:
