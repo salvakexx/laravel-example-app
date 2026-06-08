@@ -22,6 +22,7 @@ docker compose up -d
 - Web-интерфейс [http://localhost/](http://localhost/)
 - Панель управления RabbitMQ [http://localhost:15672/](http://localhost:15672/) (user : example, pass : example)
 - База-данных *localhost:5432* (user : example, pass : example) 
+- Api-документация [http://localhost/docs/api/](http://localhost/docs/api/) (server-api user : example, pass : example) 
 
 ## Тестирование
 Запуск тестов
