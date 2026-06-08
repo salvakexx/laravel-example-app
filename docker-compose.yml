@@ -22,8 +22,13 @@ services:
       - ./docker/php/logs:/var/log/php
     networks:
       - example_network
+    depends_on:
+        - redis
+        - rabbitmq
+        - postgres
     ports:
         - "9000:9000"
+    command: ["php-fpm"]
 
   postgres:
       image: postgres:15.3-alpine3.18
@@ -66,13 +71,15 @@ services:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
-#    command: ["./docker/php/entry-point.sh"]
+    command: ["supervisord", "-c", "/etc/supervisord.conf"]
     restart: always
     environment:
       QUEUE_CONNECTION: rabbitmq
     depends_on:
-      - php-fpm
-      - rabbitmq
+        - php-fpm
+        - redis
+        - rabbitmq
+        - postgres
     volumes:
       - ./:/var/www/html
     networks:

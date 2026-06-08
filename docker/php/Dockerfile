@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     npm \
     libpq-dev \
     librabbitmq-dev \
+    supervisor \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -38,14 +39,15 @@ RUN docker-php-ext-install \
 
 # Конфигурация PHP
 COPY ./docker/php/conf.d/* /usr/local/etc/php/conf.d/
+ADD  ./docker/php/supervisord.conf /etc/
 
 # Создаём директорию для работы с кодом
 WORKDIR /var/www/html
 
-# Копируем .env файл (если существует)
-COPY --chown=www-data:www-data .env.example /var/www/html/.env
-
 # Делаем проект доступным для пользователя www-data
 RUN chown -R www-data:www-data /var/www/html
 
-CMD ["php-fpm"]
+# Copy application files
+COPY . /var/www/html
+
+ENTRYPOINT ["./docker/php/entry-point.sh"]
