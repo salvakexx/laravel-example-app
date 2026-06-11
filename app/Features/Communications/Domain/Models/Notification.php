@@ -85,14 +85,14 @@ class Notification extends Model
     }
 
     #[Scope]
-    protected function forIdentity(Builder $query, string $identity): void
+    protected function scopeForIdentity(Builder $query, string $identity): void
     {
         $query->where('identity', $identity);
     }
 
     #[Scope]
-    public function scopeOrderedByCreated(Builder $query)
+    public function scopeOrderedByCreated(Builder $query): void
     {
-        return $query->orderBy('created_at', 'desc');
+        $query->orderBy('created_at', 'desc');
     }
 }

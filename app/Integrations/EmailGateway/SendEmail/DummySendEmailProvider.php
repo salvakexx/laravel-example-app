@@ -6,5 +6,5 @@ namespace App\Integrations\EmailGateway\SendEmail;
 
 class DummySendEmailProvider implements SendEmailProviderInterface
 {
-    public function send(string $email, string $topic, string $message) {}
+    public function send(string $email, string $topic, string $message): void {}
 }

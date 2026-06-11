@@ -21,6 +21,9 @@ class NotificationService
         private readonly ProducerInterface $producer,
     ) {}
 
+    /**
+     * @param string[] $recipients
+     */
     public function sendBulk(string $channel, string $message, array $recipients): void
     {
         foreach ($recipients as $identity) {

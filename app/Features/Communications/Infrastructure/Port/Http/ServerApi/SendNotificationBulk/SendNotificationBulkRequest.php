@@ -14,7 +14,7 @@ class SendNotificationBulkRequest extends ApiFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string|null>
      */
     public function rules(): array
     {
