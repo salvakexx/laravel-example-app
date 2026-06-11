@@ -14,8 +14,7 @@ final class SendNotificationBulkController extends BaseController
     public function __construct(
         private NotificationService $notificationService,
         private IdempotencyService $idempotencyService
-    ) {
-    }
+    ) {}
 
     public function send(SendNotificationBulkRequest $request): JsonResponse
     {

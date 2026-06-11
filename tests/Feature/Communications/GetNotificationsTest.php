@@ -10,7 +10,7 @@ class GetNotificationsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUnauthorizedGetNotifications()
+    public function test_unauthorized_get_notifications()
     {
         $response = $this->json(
             'GET',
@@ -20,7 +20,7 @@ class GetNotificationsTest extends TestCase
         $this->assertEquals(401, $response->getStatusCode());
     }
 
-    public function testValidationGetNotifications()
+    public function test_validation_get_notifications()
     {
         $this->iAmAuthenticatedServerApiUser();
         $response = $this->json(
@@ -31,7 +31,7 @@ class GetNotificationsTest extends TestCase
         $this->assertEquals(422, $response->getStatusCode());
     }
 
-    public function testGetEmptyNotifications()
+    public function test_get_empty_notifications()
     {
         $this->iAmAuthenticatedServerApiUser();
         $response = $this->json(
@@ -46,7 +46,7 @@ class GetNotificationsTest extends TestCase
         $this->assertEquals([], $response->json()['notifications']);
     }
 
-    public function testGetNotEmptyNotifications()
+    public function test_get_not_empty_notifications()
     {
         $notification = Notification::factory()->create();
 

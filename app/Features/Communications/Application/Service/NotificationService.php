@@ -19,8 +19,7 @@ class NotificationService
     public function __construct(
         private readonly NotificationStorageInterface $notificationStorage,
         private readonly ProducerInterface $producer,
-    ) {
-    }
+    ) {}
 
     public function sendBulk(string $channel, string $message, array $recipients): void
     {
@@ -53,7 +52,7 @@ class NotificationService
 
         switch ($channelType) {
             case ChannelType::SMS:
-                return (string)(new PhoneNumber($identity));
+                return (string) (new PhoneNumber($identity));
             default:
                 return $identity;
         }

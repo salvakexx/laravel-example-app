@@ -12,7 +12,7 @@ class AuthenticateHttpBasicAuth
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$this->authenticate($request)) {
+        if (! $this->authenticate($request)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
@@ -23,13 +23,13 @@ class AuthenticateHttpBasicAuth
     {
         $authHeader = $request->header('Authorization');
 
-        if (!$authHeader || !str_starts_with($authHeader, 'Basic ')) {
+        if (! $authHeader || ! str_starts_with($authHeader, 'Basic ')) {
             return false;
         }
 
         [$username, $password] = explode(':', base64_decode(substr($authHeader, 6)), 2);
 
-        if (!$username || !$password) {
+        if (! $username || ! $password) {
             return false;
         }
 

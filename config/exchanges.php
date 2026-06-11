@@ -1,6 +1,6 @@
 <?php
 
-use \App\Queue\ExchangesAndQueuesEnum;
+use App\Queue\ExchangesAndQueuesEnum;
 
 return [
     ExchangesAndQueuesEnum::COMMUNICATIONS_TOPIC->value => [
@@ -9,7 +9,7 @@ return [
             [
                 'name' => ExchangesAndQueuesEnum::COMMUNICATIONS_QUEUE->value,
                 'x-max-priority' => 10,
-            ]
-        ]
+            ],
+        ],
     ],
 ];

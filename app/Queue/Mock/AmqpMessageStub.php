@@ -57,7 +57,7 @@ class AmqpMessageStub
         }
 
         foreach ($array1 as $key => $value) {
-            if (!array_key_exists($key, $array2)) {
+            if (! array_key_exists($key, $array2)) {
                 return false;
             }
             if ($value !== $array2[$key]) {

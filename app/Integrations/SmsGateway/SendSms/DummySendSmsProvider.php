@@ -6,8 +6,5 @@ namespace App\Integrations\SmsGateway\SendSms;
 
 class DummySendSmsProvider implements SendSmsProviderInterface
 {
-    public function send(string $phone, string $message)
-    {
-
-    }
+    public function send(string $phone, string $message) {}
 }

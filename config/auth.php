@@ -117,6 +117,6 @@ return [
     'http_basic_auth_credentials' => [
         env('SERVER_API_EXAMPLE_USERNAME') => [
             'password' => env('SERVER_API_EXAMPLE_PASSWORD'),
-        ]
+        ],
     ],
 ];

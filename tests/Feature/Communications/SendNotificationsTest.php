@@ -20,7 +20,7 @@ class SendNotificationsTest extends TestCase
         $this->mockAmqp();
     }
 
-    public function testValidationSendNotification()
+    public function test_validation_send_notification()
     {
         $this->iAmAuthenticatedServerApiUser();
         $response = $this->json(
@@ -31,7 +31,7 @@ class SendNotificationsTest extends TestCase
         $this->assertEquals(422, $response->getStatusCode());
     }
 
-    public function testValidSendNotification()
+    public function test_valid_send_notification()
     {
         $this->iAmAuthenticatedServerApiUser();
         $response = $this->json(
@@ -57,7 +57,7 @@ class SendNotificationsTest extends TestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
-    public function testIdempotencyCheck()
+    public function test_idempotency_check()
     {
         $this->iAmAuthenticatedServerApiUser();
 

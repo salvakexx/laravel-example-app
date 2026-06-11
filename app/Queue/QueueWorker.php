@@ -60,6 +60,7 @@ class QueueWorker extends RabbitMQQueue
 
         return [$destination, $exchange, $exchangeType, $attempts, $priority];
     }
+
     /**
      * Create a AMQP message.
      */

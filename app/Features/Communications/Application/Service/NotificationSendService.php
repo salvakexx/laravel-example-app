@@ -14,8 +14,7 @@ class NotificationSendService
     public function __construct(
         private readonly SendSmsProviderInterface $sendSmsProvider,
         private readonly SendEmailProviderInterface $sendEmailProvider,
-    ) {
-    }
+    ) {}
 
     public function sendNotification(Notification $notification): void
     {

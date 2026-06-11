@@ -21,7 +21,7 @@ class SendNotificationJobTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testValidSmsSendNotificationJob()
+    public function test_valid_sms_send_notification_job()
     {
         $notification = Notification::factory()->create([
             'channel' => ChannelType::SMS->value,
@@ -38,7 +38,7 @@ class SendNotificationJobTest extends TestCase
         $this->assertEquals(ChannelType::SMS->value, $notification->getChannel());
     }
 
-    public function testValidEmailSendNotificationJob()
+    public function test_valid_email_send_notification_job()
     {
         $notification = Notification::factory()->create([
             'channel' => ChannelType::EMAIL->value,
@@ -55,7 +55,7 @@ class SendNotificationJobTest extends TestCase
         $this->assertEquals(ChannelType::EMAIL->value, $notification->getChannel());
     }
 
-    public function testNotValidEmailSendNotificationJob()
+    public function test_not_valid_email_send_notification_job()
     {
         $notification = Notification::factory()->create([
             'channel' => ChannelType::EMAIL->value,
@@ -63,9 +63,8 @@ class SendNotificationJobTest extends TestCase
 
         $job = new SendNotificationJob($notification);
 
-
         $mock = \Mockery::mock(DummySendEmailProvider::class);
-        $mock->shouldReceive('send')->once()->andThrow(new EmailDoesNotExistException());
+        $mock->shouldReceive('send')->once()->andThrow(new EmailDoesNotExistException);
 
         $this->instance(SendEmailProviderInterface::class, $mock);
 
@@ -75,7 +74,7 @@ class SendNotificationJobTest extends TestCase
         $this->assertEquals(ChannelType::EMAIL->value, $notification->getChannel());
     }
 
-    public function testNotValidSmsSendNotificationJob()
+    public function test_not_valid_sms_send_notification_job()
     {
         $notification = Notification::factory()->create([
             'channel' => ChannelType::SMS->value,
@@ -84,7 +83,7 @@ class SendNotificationJobTest extends TestCase
         $job = new SendNotificationJob($notification);
 
         $mock = \Mockery::mock(DummySendSmsProvider::class);
-        $mock->shouldReceive('send')->once()->andThrow(new PhoneDoesNotExistException());
+        $mock->shouldReceive('send')->once()->andThrow(new PhoneDoesNotExistException);
 
         $this->instance(SendSmsProviderInterface::class, $mock);
 

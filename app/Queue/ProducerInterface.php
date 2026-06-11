@@ -8,4 +8,3 @@ interface ProducerInterface
 {
     public function publish(string $exchange, ShouldQueue $job, ?string $routingKey = null, ?int $priority = null): void;
 }
-

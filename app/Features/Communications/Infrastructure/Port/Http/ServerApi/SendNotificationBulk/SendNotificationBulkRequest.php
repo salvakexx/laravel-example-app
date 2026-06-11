@@ -9,8 +9,7 @@ use App\Http\Requests\ApiFormRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Validation\Rule;
 
-class
-SendNotificationBulkRequest extends ApiFormRequest
+class SendNotificationBulkRequest extends ApiFormRequest
 {
     /**
      * Get the validation rules that apply to the request.

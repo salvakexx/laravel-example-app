@@ -28,6 +28,7 @@ class GetNotificationsByIdentityRequest extends ApiFormRequest
         if ($this->query('identity') && str_contains($this->query('identity'), '@')) {
             return 'email';
         }
+
         return 'phone:INTERNATIONAL';
     }
 }

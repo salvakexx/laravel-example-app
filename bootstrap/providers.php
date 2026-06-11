@@ -1,6 +1,9 @@
 <?php
 
+use App\Features\Communications\Infrastructure\CommunicationsServiceProvider;
+use App\Providers\AppServiceProvider;
+
 return [
-    App\Providers\AppServiceProvider::class,
-    App\Features\Communications\Infrastructure\CommunicationsServiceProvider::class,
+    AppServiceProvider::class,
+    CommunicationsServiceProvider::class,
 ];

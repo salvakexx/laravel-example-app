@@ -12,13 +12,12 @@ class NotificationStorage implements NotificationStorageInterface
 {
     public function saveNotification(string $channel, string $message, string $identity): Notification
     {
-        $notification = (new Notification())
+        $notification = (new Notification)
             ->setChannel($channel)
             ->setMessage($message)
             ->setIdentity($identity)
             ->setStatus(NotificationStatus::QUEUED)
-            ->setSender('default')
-        ;
+            ->setSender('default');
 
         $notification->save();
 

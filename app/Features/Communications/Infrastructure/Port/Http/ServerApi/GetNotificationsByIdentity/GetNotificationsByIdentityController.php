@@ -32,8 +32,7 @@ final class GetNotificationsByIdentityController extends BaseController
                 'sender' => $notification->getSender(),
                 'created_at' => $notification->created_at?->toIso8601String(),
             ])
-            ->toArray()
-        ;
+            ->toArray();
 
         return response()->json([
             'notifications' => $notificationsData,

@@ -23,6 +23,6 @@ class CommunicationsServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadRoutesFrom(__DIR__ . '/Routes/Routes.php');
+        $this->loadRoutesFrom(__DIR__.'/Routes/Routes.php');
     }
 }
