@@ -23,7 +23,7 @@ class GetNotificationsByIdentityRequest extends ApiFormRequest
         ];
     }
 
-    private function getIdentityValidationRuleByInput(): ?string
+    private function getIdentityValidationRuleByInput(): string
     {
         if ($this->query('identity') && str_contains($this->query('identity'), '@')) {
             return 'email';

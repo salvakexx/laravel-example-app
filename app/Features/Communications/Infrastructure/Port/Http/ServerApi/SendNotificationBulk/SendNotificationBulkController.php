@@ -23,10 +23,13 @@ final class SendNotificationBulkController extends BaseController
         if ($isCachedRequest === false) {
             $this->idempotencyService->persistIdempotencyCacheByApiFormRequest($request);
 
+            /* @var $recipients string[] */
+            $recipients = array_unique($request->input('recipients'));
+
             $this->notificationService->sendBulk(
                 channel: $request->input('channel'),
                 message: $request->input('message'),
-                recipients: array_unique($request->input('recipients')),
+                recipients: $recipients,
             );
         }
 

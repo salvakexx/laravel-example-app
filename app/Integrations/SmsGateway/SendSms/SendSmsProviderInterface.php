@@ -6,5 +6,5 @@ namespace App\Integrations\SmsGateway\SendSms;
 
 interface SendSmsProviderInterface
 {
-    public function send(string $phone, string $message);
+    public function send(string $phone, string $message): void;
 }
